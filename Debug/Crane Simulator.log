@@ -1,0 +1,4 @@
+﻿  main.cpp
+E:\Projects\Crane Simulator\Crane Simulator\Crane Simulator\main.cpp(12,22): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+E:\Projects\Crane Simulator\Crane Simulator\Crane Simulator\main.cpp(11,37): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+  Crane Simulator.vcxproj -> E:\Projects\Crane Simulator\Crane Simulator\Debug\Crane Simulator.exe
