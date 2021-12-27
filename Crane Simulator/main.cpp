@@ -45,26 +45,26 @@ int main(void)
 				// move left
 				else if(sf::Keyboard::isKeyPressed(sf::Keyboard::A))
 				{ 
-					truck.moveTruck(-1, 0, window.getSize().x,
-						window.getSize().y); 
+					truck.moveTruck(-1, 0); 
 				}
 				// move right
 				else if(sf::Keyboard::isKeyPressed(sf::Keyboard::D))
 				{ 
-					truck.moveTruck(1, 0, window.getSize().x,
-						window.getSize().y); 
+					truck.moveTruck(1, 0); 
 				}
 //-----------------------------------------------------------
 				// main boom up
 				else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Q))
 				{ 
 					truck.raiseMainBoom(true); 
-					truck.moveTruck(0, 0, window.getSize().x/2,
-						window.getSize().y/2);
+					truck.moveTruck(0, 0);
 				}
 				// main boom down
 				else if(sf::Keyboard::isKeyPressed(sf::Keyboard::E))
-				{ truck.raiseMainBoom(false); }
+				{ 
+					truck.raiseMainBoom(false); 
+					truck.moveTruck(0, 0);
+				}
 //-----------------------------------------------------------
 				// extend boom
 				else if(sf::Keyboard::isKeyPressed(sf::Keyboard::X))

@@ -81,7 +81,7 @@ void Truck::setOrigin(int x, int y)
 	// main boom position set relative to
 	// truck bed
 	Truck::mainBoom.setPosition(Truck::truckBed.getPosition().x
-		+ 100., Truck::truckBed.getPosition().y);
+		+ 75., Truck::truckBed.getPosition().y);
 //-----------------------------------------------------------
 	// extension boom 1 position set relative to
 	// main boom
@@ -92,31 +92,29 @@ void Truck::setOrigin(int x, int y)
 	Truck::boomRam.setPosition(Truck::truckBed.getPosition().x
 		+ 70., Truck::truckBed.getPosition().y + 5.);
 //-----------------------------------------------------------
-	// boom ram cylinder position of vertices
+	// position of boom ram cylinder vertices
 	Truck::boomRamCylinder.setPoint(1, sf::Vector2f(Truck::
-		truckBed.getPosition().x + 70., Truck::truckBed.
+		truckBed.getPosition().x + 62.5, Truck::truckBed.
 		getPosition().y + 3.));
 	Truck::boomRamCylinder.setPoint(2, sf::Vector2f(Truck::
-		truckBed.getPosition().x + 70., Truck::truckBed.
+		truckBed.getPosition().x + 62.5, Truck::truckBed.
 		getPosition().y + 6.));
 	
-	// attach to main boom bottom half length
+	// global points for the main boom
+	sf::Vector2f pointRight = Truck::mainBoom.getTransform() *
+		Truck::mainBoom.getPoint(0);
+	sf::Vector2f pointLeft = Truck::mainBoom.getTransform() *
+		Truck::mainBoom.getPoint(1);
+
+	// attach cylinder top to main boom bottom half length
 	Truck::boomRamCylinder.setPoint(3, sf::Vector2f(
-		(Truck::mainBoom.getPoint(0).x +
-			Truck::mainBoom.getPoint(1).x) / 2 + 
-		x + 125.,
-		(Truck::mainBoom.getPoint(0).y +
-			Truck::mainBoom.getPoint(1).y) / 2 +
-		y + 5.
+		(pointRight.x + pointLeft.x) / 2,
+		(pointRight.y + pointLeft.y) / 2
 	));
 
 	Truck::boomRamCylinder.setPoint(0, sf::Vector2f(
-		(Truck::mainBoom.getPoint(0).x +
-			Truck::mainBoom.getPoint(1).x) / 2 +
-		x + 125.,
-		(Truck::mainBoom.getPoint(0).y +
-			Truck::mainBoom.getPoint(1).y) / 2 +
-		y + 2.
+		(pointRight.x + pointLeft.x) / 2,
+		(pointRight.y + pointLeft.y) / 2 - 3.
 	));
 //-----------------------------------------------------------
 }
@@ -133,7 +131,7 @@ void Truck::reset(int x, int y)
 //-----------------------------------------------------------
 // MOVE A TRUCK by X and Y pixels
 //-----------------------------------------------------------
-void Truck::moveTruck(int x, int y, int wx, int wy)
+void Truck::moveTruck(int x, int y)
 {
 //-----------------------------------------------------------
 	// set truck cabin position
@@ -158,7 +156,7 @@ void Truck::moveTruck(int x, int y, int wx, int wy)
 //-----------------------------------------------------------	
 	// position of main boom set with truck flatbed
 	Truck::mainBoom.setPosition(Truck::truckBed.getPosition().x
-		+ 100, Truck::truckBed.getPosition().y);
+		+ 75., Truck::truckBed.getPosition().y);
 //-----------------------------------------------------------	
 	// position of extension boom set relatice to main boom
 	Truck::extArm1.setPosition(Truck::mainBoom.getPosition().x,
@@ -168,15 +166,45 @@ void Truck::moveTruck(int x, int y, int wx, int wy)
 	Truck::boomRam.setPosition(Truck::truckBed.getPosition().x
 		+ 70., Truck::truckBed.getPosition().y + 5.);
 //-----------------------------------------------------------
-	// attach to main boom bottom half length
+	// boom ram cylinder graphics adjustment factor
+	int adjustmentFactor = 0;
+	if (Truck::mainBoom.getRotation() > 30 && 
+		Truck::mainBoom.getRotation() < 70)
+	{
+		adjustmentFactor = 1;
+	}
+	else if (Truck::mainBoom.getRotation() >= 70)
+	{
+		adjustmentFactor = 2;
+	}
+	else
+	{
+		adjustmentFactor = 0;
+	}
+
+	// position of boom ram cylinder vertices
+	Truck::boomRamCylinder.setPoint(1, sf::Vector2f(Truck::
+		truckBed.getPosition().x + 62.5, Truck::truckBed.
+		getPosition().y + 3.));
+	Truck::boomRamCylinder.setPoint(2, sf::Vector2f(Truck::
+		truckBed.getPosition().x + 62.5 - adjustmentFactor, Truck::truckBed.
+		getPosition().y + 6.));
+
+	// global points for the main boom
+	sf::Vector2f pointRight = Truck::mainBoom.getTransform() *
+		Truck::mainBoom.getPoint(0);
+	sf::Vector2f pointLeft = Truck::mainBoom.getTransform() *
+		Truck::mainBoom.getPoint(1);
+
+	// attach cylinder top to main boom bottom half length
 	Truck::boomRamCylinder.setPoint(3, sf::Vector2f(
-		-65 * std::cos((Truck::mainBoom.getRotation() + 270) * 3.14 / 180),
-		-65 * std::sin((Truck::mainBoom.getRotation() + 270) * 3.14 / 180) + 3.
+		(pointRight.x + pointLeft.x) / 2,
+		(pointRight.y + pointLeft.y) / 2
 	));
 
 	Truck::boomRamCylinder.setPoint(0, sf::Vector2f(
-		-65 * std::cos((Truck::mainBoom.getRotation() + 270) * 3.14 / 180),
-		-65 * std::sin((Truck::mainBoom.getRotation() + 270) * 3.14 / 180)
+		(pointRight.x + pointLeft.x) / 2 + adjustmentFactor,
+		(pointRight.y + pointLeft.y) / 2 - 3.
 	));
 //-----------------------------------------------------------
 }

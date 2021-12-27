@@ -16,7 +16,7 @@ public:
 	// reset truck
 	void reset(int, int);
 	// move a truck by X and Y pixels
-	void moveTruck(int, int, int, int);
+	void moveTruck(int, int);
 	// lift main boom
 	void raiseMainBoom(bool);
 	// extend boom
@@ -60,5 +60,6 @@ private:
 	sf::RectangleShape boomRam;
 	// boom ram cylinder shape
 	sf::ConvexShape boomRamCylinder;
+	
 //-----------------------------------------------------------
 };
