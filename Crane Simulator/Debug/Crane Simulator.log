@@ -1,0 +1,91 @@
+﻿  Truck.cpp
+E:\Projects\Crane Simulator\Crane Simulator\Truck.cpp(59,35): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+E:\Projects\Crane Simulator\Crane Simulator\Truck.cpp(59,32): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+E:\Projects\Crane Simulator\Crane Simulator\Truck.cpp(64,44): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+E:\Projects\Crane Simulator\Crane Simulator\Truck.cpp(64,3): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+E:\Projects\Crane Simulator\Crane Simulator\Truck.cpp(69,44): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+E:\Projects\Crane Simulator\Crane Simulator\Truck.cpp(69,3): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+E:\Projects\Crane Simulator\Crane Simulator\Truck.cpp(78,4): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+E:\Projects\Crane Simulator\Crane Simulator\Truck.cpp(84,3): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+E:\Projects\Crane Simulator\Crane Simulator\Truck.cpp(89,35): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+E:\Projects\Crane Simulator\Crane Simulator\Truck.cpp(93,42): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+E:\Projects\Crane Simulator\Crane Simulator\Truck.cpp(93,3): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+E:\Projects\Crane Simulator\Crane Simulator\Truck.cpp(98,19): warning C4244: 'argument': conversion from 'double' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+E:\Projects\Crane Simulator\Crane Simulator\Truck.cpp(97,28): warning C4244: 'argument': conversion from 'double' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+E:\Projects\Crane Simulator\Crane Simulator\Truck.cpp(101,19): warning C4244: 'argument': conversion from 'double' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+E:\Projects\Crane Simulator\Crane Simulator\Truck.cpp(100,28): warning C4244: 'argument': conversion from 'double' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+E:\Projects\Crane Simulator\Crane Simulator\Truck.cpp(110,5): warning C4244: 'argument': conversion from 'double' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+E:\Projects\Crane Simulator\Crane Simulator\Truck.cpp(107,5): warning C4244: 'argument': conversion from 'double' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+E:\Projects\Crane Simulator\Crane Simulator\Truck.cpp(119,5): warning C4244: 'argument': conversion from 'double' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+E:\Projects\Crane Simulator\Crane Simulator\Truck.cpp(116,5): warning C4244: 'argument': conversion from 'double' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+E:\Projects\Crane Simulator\Crane Simulator\Truck.cpp(145,44): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+E:\Projects\Crane Simulator\Crane Simulator\Truck.cpp(145,3): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+E:\Projects\Crane Simulator\Crane Simulator\Truck.cpp(149,44): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+E:\Projects\Crane Simulator\Crane Simulator\Truck.cpp(149,3): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+E:\Projects\Crane Simulator\Crane Simulator\Truck.cpp(156,4): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+E:\Projects\Crane Simulator\Crane Simulator\Truck.cpp(165,35): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+E:\Projects\Crane Simulator\Crane Simulator\Truck.cpp(169,42): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+E:\Projects\Crane Simulator\Crane Simulator\Truck.cpp(169,3): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+E:\Projects\Crane Simulator\Crane Simulator\Truck.cpp(174,70): warning C4244: 'argument': conversion from 'double' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+E:\Projects\Crane Simulator\Crane Simulator\Truck.cpp(173,7): warning C4244: 'argument': conversion from 'double' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+E:\Projects\Crane Simulator\Crane Simulator\Truck.cpp(179,7): warning C4244: 'argument': conversion from 'double' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+E:\Projects\Crane Simulator\Crane Simulator\Truck.cpp(178,7): warning C4244: 'argument': conversion from 'double' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+E:\Projects\Crane Simulator\Crane Simulator\Truck.cpp(228,16): warning C4244: 'argument': conversion from 'double' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+E:\Projects\Crane Simulator\Crane Simulator\Truck.cpp(238,16): warning C4244: 'argument': conversion from 'double' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+  Crane Simulator.vcxproj -> E:\Projects\Crane Simulator\Debug\Crane Simulator.exe
