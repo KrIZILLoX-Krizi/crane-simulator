@@ -8,38 +8,38 @@ Truck::Truck(void)
 {
 //-----------------------------------------------------------
 	// designing truck cabin
-	Truck::truckCabin.setPointCount(5);
+	Truck::truckCabin.setPointCount(cabin_points);
 	Truck::truckCabin.setFillColor(sf::Color::Yellow);
 //-----------------------------------------------------------
 	// truck cabin vertices
-	Truck::truckCabin.setPoint(0, sf::Vector2f(5., 0.));
-	Truck::truckCabin.setPoint(1, sf::Vector2f(25., 0.));
-	Truck::truckCabin.setPoint(2, sf::Vector2f(25., 30.));
-	Truck::truckCabin.setPoint(3, sf::Vector2f(0., 30.));
-	Truck::truckCabin.setPoint(4, sf::Vector2f(0., 15.));
+	Truck::truckCabin.setPoint(0, sf::Vector2f(cabin_offset, origin));
+	Truck::truckCabin.setPoint(1, sf::Vector2f(cabin_length, origin));
+	Truck::truckCabin.setPoint(2, sf::Vector2f(cabin_length, cabin_height));
+	Truck::truckCabin.setPoint(3, sf::Vector2f(origin, cabin_height));
+	Truck::truckCabin.setPoint(4, sf::Vector2f(origin, cabin_hood_height));
 //-----------------------------------------------------------
 	// designing truck flatbed
-	Truck::truckBed.setSize(sf::Vector2f(100., 25.));
+	Truck::truckBed.setSize(sf::Vector2f(bed_length, bed_height));
 	Truck::truckBed.setFillColor(sf::Color::Green);
 //-----------------------------------------------------------
 	// designing tyres
-	Truck::tyre.setRadius(10);
+	Truck::tyre.setRadius(tyre_radius);
 	Truck::tyre.setFillColor(sf::Color::Black);
 //-----------------------------------------------------------
 	// designing the main boom
-	Truck::mainBoom.setSize(sf::Vector2f(-130, -20));
+	Truck::mainBoom.setSize(sf::Vector2f(main_boom_length, main_boom_height));
 	Truck::mainBoom.setFillColor(sf::Color::Yellow);
 //-----------------------------------------------------------
 	// designing extension arm 1
-	Truck::extArm1.setSize(sf::Vector2f(-132, -15));
+	Truck::extArm1.setSize(sf::Vector2f(ext_arm_length, ext_arm_height));
 	Truck::extArm1.setFillColor(sf::Color::Red);
 //-----------------------------------------------------------
 	// designing boom ram
-	Truck::boomRam.setSize(sf::Vector2f(-30, -5));
+	Truck::boomRam.setPointCount(boom_ram_points);
 	Truck::boomRam.setFillColor(sf::Color::Red);
 //-----------------------------------------------------------
 	// designing boom ram cylinder
-	Truck::boomRamCylinder.setPointCount(4);
+	Truck::boomRamCylinder.setPointCount(boom_ram_cylinder_points);
 	Truck::boomRamCylinder.setFillColor(sf::Color::Black);
 //-----------------------------------------------------------
 	
@@ -61,44 +61,59 @@ void Truck::setOrigin(int x, int y)
 	// truck bed position set relative to
 	// truck cabin
 	Truck::truckBed.setPosition(Truck::truckCabin.getPosition().x
-		+ 25., Truck::truckCabin.getPosition().y + 5.);
+		+ cabin_length,
+		Truck::truckCabin.getPosition().y + bed_height_offset_to_cabin
+	);
 //-----------------------------------------------------------
 	// tyre position relative to cabin and flatbed
 	Truck::tyresVector.push_back(Truck::tyre);
 	Truck::tyresVector[0].setPosition(Truck::truckCabin.getPosition().x
-		+ 10., Truck::truckCabin.getPosition().y + 20.);
+		+ tyre_x_offset_to_cabin,
+		Truck::truckCabin.getPosition().y + tyre_y_offset_to_cabin
+	);
 //-----------------------------------------------------------	
 	// remaining tyres
-	for (int i = 1; i < 5; ++i)
+	for (int i = 1; i <= Truck::no_of_tyres; ++i)
 	{
 		// adding remaining tyres
 		Truck::tyresVector.push_back(Truck::tyre);
 		// updating tyre positions
 		Truck::tyresVector[i].setPosition(Truck::tyresVector[i-1].getPosition().x
-			+ 22., Truck::tyresVector[i-1].getPosition().y);
+			+ tyre_gap,
+			Truck::tyresVector[i-1].getPosition().y
+		);
 	}
 //-----------------------------------------------------------
 	// main boom position set relative to
 	// truck bed
 	Truck::mainBoom.setPosition(Truck::truckBed.getPosition().x
-		+ 75., Truck::truckBed.getPosition().y);
+		+ main_boom_offset_to_bed,
+		Truck::truckBed.getPosition().y
+	);
 //-----------------------------------------------------------
 	// extension boom 1 position set relative to
 	// main boom
 	Truck::extArm1.setPosition(Truck::mainBoom.getPosition().x,
-		Truck::mainBoom.getPosition().y - 3.);
+		Truck::mainBoom.getPosition().y + ext_arm_offset_to_main_boom
+	);
 //-----------------------------------------------------------
 	// boom ram position set relative to boom ram cylinders
 	Truck::boomRam.setPosition(Truck::truckBed.getPosition().x
-		+ 70., Truck::truckBed.getPosition().y + 5.);
+		+ boom_ram_x_offset_to_flatbed,
+		Truck::truckBed.getPosition().y + boom_ram_y_offset_to_flatbed
+	);
 //-----------------------------------------------------------
 	// position of boom ram cylinder vertices
 	Truck::boomRamCylinder.setPoint(1, sf::Vector2f(Truck::
-		truckBed.getPosition().x + 62.5, Truck::truckBed.
-		getPosition().y + 3.));
+		truckBed.getPosition().x + boom_ram_cylinder_x_offset_to_flatbed,
+		Truck::truckBed.getPosition().y + 
+		boom_ram_cylinder_y_offset_to_flatbed_up
+	));
 	Truck::boomRamCylinder.setPoint(2, sf::Vector2f(Truck::
-		truckBed.getPosition().x + 62.5, Truck::truckBed.
-		getPosition().y + 6.));
+		truckBed.getPosition().x + boom_ram_cylinder_x_offset_to_flatbed,
+		Truck::truckBed.getPosition().y +
+		boom_ram_cylinder_y_offset_to_flatbed_down
+	));
 	
 	// global points for the main boom
 	sf::Vector2f pointRight = Truck::mainBoom.getTransform() *
@@ -114,7 +129,7 @@ void Truck::setOrigin(int x, int y)
 
 	Truck::boomRamCylinder.setPoint(0, sf::Vector2f(
 		(pointRight.x + pointLeft.x) / 2,
-		(pointRight.y + pointLeft.y) / 2 - 3.
+		(pointRight.y + pointLeft.y) / 2 - boom_ram_cylinder_y_offset_to_main_boom
 	));
 //-----------------------------------------------------------
 }
@@ -136,44 +151,56 @@ void Truck::moveTruck(int x, int y)
 //-----------------------------------------------------------
 	// set truck cabin position
 	Truck::truckCabin.setPosition(Truck::truckCabin.getPosition().x + x,
-		Truck::truckCabin.getPosition().y + y);
+		Truck::truckCabin.getPosition().y + y
+	);
 //-----------------------------------------------------------
 	// position of truck bed set relative to truck cabin
 	Truck::truckBed.setPosition(Truck::truckCabin.getPosition().x
-		+ 25., Truck::truckCabin.getPosition().y + 5.);
+		+ cabin_length,
+		Truck::truckCabin.getPosition().y + bed_height_offset_to_cabin
+	);
 //-----------------------------------------------------------
 	// tyre position relative to cabin and flatbed
 	Truck::tyresVector[0].setPosition(Truck::truckCabin.getPosition().x
-		+ 10., Truck::truckCabin.getPosition().y + 20.);
+		+ 10., 
+		Truck::truckCabin.getPosition().y + 20.
+	);
 //-----------------------------------------------------------
 	// remaining tyres
-	for (int i = 1; i < 5; ++i)
+	for (int i = 1; i <= Truck::no_of_tyres; ++i)
 	{
 		// updating tyre positions
 		Truck::tyresVector[i].setPosition(Truck::tyresVector[i - 1].getPosition().x
-			+ 22., Truck::tyresVector[i - 1].getPosition().y);
+			+ tyre_gap, 
+			Truck::tyresVector[i - 1].getPosition().y
+		);
 	}
 //-----------------------------------------------------------	
 	// position of main boom set with truck flatbed
 	Truck::mainBoom.setPosition(Truck::truckBed.getPosition().x
-		+ 75., Truck::truckBed.getPosition().y);
+		+ main_boom_offset_to_bed,
+		Truck::truckBed.getPosition().y
+	);
 //-----------------------------------------------------------	
 	// position of extension boom set relatice to main boom
 	Truck::extArm1.setPosition(Truck::mainBoom.getPosition().x,
-		Truck::mainBoom.getPosition().y - 3.);
+		Truck::mainBoom.getPosition().y + ext_arm_offset_to_main_boom
+	);
 //-----------------------------------------------------------
 	// boom ram position set relative to truck flatbed
 	Truck::boomRam.setPosition(Truck::truckBed.getPosition().x
-		+ 70., Truck::truckBed.getPosition().y + 5.);
+		+ boom_ram_x_offset_to_flatbed,
+		Truck::truckBed.getPosition().y + boom_ram_y_offset_to_flatbed
+	);
 //-----------------------------------------------------------
 	// boom ram cylinder graphics adjustment factor
 	int adjustmentFactor = 0;
-	if (Truck::mainBoom.getRotation() > 30 && 
-		Truck::mainBoom.getRotation() < 70)
+	if (Truck::mainBoom.getRotation() > boom_ram_cylinder_adjust_angle_lower && 
+		Truck::mainBoom.getRotation() < boom_ram_cylinder_adjust_angle_upper)
 	{
 		adjustmentFactor = 1;
 	}
-	else if (Truck::mainBoom.getRotation() >= 70)
+	else if (Truck::mainBoom.getRotation() >= boom_ram_cylinder_adjust_angle_upper)
 	{
 		adjustmentFactor = 2;
 	}
@@ -184,11 +211,17 @@ void Truck::moveTruck(int x, int y)
 
 	// position of boom ram cylinder vertices
 	Truck::boomRamCylinder.setPoint(1, sf::Vector2f(Truck::
-		truckBed.getPosition().x + 62.5, Truck::truckBed.
-		getPosition().y + 3.));
+		truckBed.getPosition().x + boom_ram_cylinder_x_offset_to_flatbed,
+		Truck::truckBed.getPosition().y +
+		boom_ram_cylinder_y_offset_to_flatbed_up
+	));
+
 	Truck::boomRamCylinder.setPoint(2, sf::Vector2f(Truck::
-		truckBed.getPosition().x + 62.5 - adjustmentFactor, Truck::truckBed.
-		getPosition().y + 6.));
+		truckBed.getPosition().x + boom_ram_cylinder_x_offset_to_flatbed
+		 - adjustmentFactor,
+		Truck::truckBed.getPosition().y +
+		boom_ram_cylinder_y_offset_to_flatbed_down
+	));
 
 	// global points for the main boom
 	sf::Vector2f pointRight = Truck::mainBoom.getTransform() *
@@ -204,7 +237,12 @@ void Truck::moveTruck(int x, int y)
 
 	Truck::boomRamCylinder.setPoint(0, sf::Vector2f(
 		(pointRight.x + pointLeft.x) / 2 + adjustmentFactor,
-		(pointRight.y + pointLeft.y) / 2 - 3.
+		(pointRight.y + pointLeft.y) / 2 - boom_ram_cylinder_y_offset_to_main_boom
+	));
+
+	Truck::boomRamCylinder.setPoint(3, sf::Vector2f(
+		(pointRight.x + pointLeft.x) / 2,
+		(pointRight.y + pointLeft.y) / 2
 	));
 //-----------------------------------------------------------
 }
@@ -220,8 +258,10 @@ void Truck::raiseMainBoom(bool up_down)
 	if(up_down == true)
 	{ 
 		// edge condition for raise
-		if(Truck::mainBoom.getRotation() > 80)
-		{ return; }
+		if(Truck::mainBoom.getRotation() > main_boom_rotate_upper_limit)
+		{ 
+			return; 
+		}
 
 		// else rotate
 		Truck::mainBoom.rotate(1);
@@ -230,7 +270,7 @@ void Truck::raiseMainBoom(bool up_down)
 	else 
 	{ 
 		// edge condition for lower
-		if(Truck::mainBoom.getRotation() <= 0)
+		if(Truck::mainBoom.getRotation() <= main_boom_rotate_lower_limit)
 		{ return; }
 
 		// else rotate
@@ -248,22 +288,30 @@ void Truck::extendBoom(bool in_out)
 	if (in_out == true)
 	{
 		// edge condition for extend
-		if(Truck::extArm1.getSize().x <= -245)
-		{ return; }
+		if(Truck::extArm1.getSize().x <= ext_arm_extend_limit)
+		{ 
+			return; 
+		}
 
 		// else extend
 		Truck::extArm1.setSize(sf::Vector2f(Truck::extArm1.
-			getSize().x - 1., Truck::extArm1.getSize().y));
+			getSize().x - 1., 
+			Truck::extArm1.getSize().y)
+		);
 	}
 	else
 	{
 		// edge condition for retract
-		if(Truck::extArm1.getSize().x >= -132)
-		{ return; }
+		if(Truck::extArm1.getSize().x >= ext_arm_retract_limit)
+		{ 
+			return; 
+		}
 
 		// else retract
 		Truck::extArm1.setSize(sf::Vector2f(Truck::extArm1.
-			getSize().x + 1., Truck::extArm1.getSize().y));
+			getSize().x + 1., 
+			Truck::extArm1.getSize().y)
+		);
 	}
 }
 //-----------------------------------------------------------
@@ -302,7 +350,7 @@ sf::RectangleShape Truck::getExtBoom(void)
 }
 //-----------------------------------------------------------
 // get boom ram graphics
-sf::RectangleShape Truck::getBoomRam(void)
+sf::ConvexShape Truck::getBoomRam(void)
 {
 	return this->boomRam;
 }
